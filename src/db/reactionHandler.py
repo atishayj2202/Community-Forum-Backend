@@ -32,3 +32,15 @@ def addComment(Session, pid, body, author_name, author_id):
         return {"Status": "Success"}
     except:
         return {"Status": "Error", "Data": "Unexpected Error"}
+
+def getComments(Session, pid):
+    session = Session()
+    try:
+        result = session.execute(statement=text("SELECT * FROM article_comments WHERE article_id = :el1 ORDER BY time DESC LIMIT 30;"), params = {
+            "el1": pid
+        }).fetchall()
+        if len(result) < 1:
+            return {"Status": "Not Success", "Data": "Not Found"}
+        return {"Status": "Found", "Data": result}
+    except:
+        return {"Status": "Error", "Data": "Unexpected Error"}
