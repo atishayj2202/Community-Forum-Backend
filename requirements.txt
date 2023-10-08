@@ -1,6 +1,0 @@
-psycopg2-binary>=2.9.7,<3
-sqlalchemy
-sqlalchemy-cockroachdb
-fastapi
-uvicorn
-requests
