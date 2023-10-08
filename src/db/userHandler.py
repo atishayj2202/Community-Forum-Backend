@@ -1,10 +1,12 @@
 from sqlalchemy import text
+import uuid
 def create_user(Session, author_name, uid):
     session = Session()
+    id = uuid.uuid4()
     try:
         session.execute(statement=text(
-            "INSERT INTO authors (uid, author_name) VALUES (:el1, :el2);"),
-            params={"el1": uid, "el2": author_name,})
+            "INSERT INTO authors (uid, author_name, id) VALUES (:el1, :el2, :el3);"),
+            params={"el1": uid, "el2": author_name,"el3":id})
         session.commit()
         return {"Status": "Success", "Data": id}
     except:
