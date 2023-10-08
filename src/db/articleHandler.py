@@ -5,7 +5,7 @@ import uuid
 def get_All_Post(Session):
     session = Session()
     try:
-        result = session.execute(statement=text("SELECT * FROM articles ORDER BY time DESC LIMIT 5;")).fetchall()
+        result = session.execute(statement=text("SELECT * FROM articles ORDER BY time DESC LIMIT 15;")).fetchall()
         if len(result) < 1:
             return {"Status": "Not Success", "Data": "Not Found"}
         return {"Status": "Found", "Data": result}
