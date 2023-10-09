@@ -15,49 +15,49 @@ class reactionRouter():
         self._router = APIRouter(prefix="/reaction")
 
         @self._router.post(self._ENDPOINT_ADD_LIKE)
-        async def route_createuserPOST(pid: str):
+        async def route_addlikePOST(pid: str):
             if not pid:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(addLike(self._client.get_session(), pid))
 
         @self._router.get(self._ENDPOINT_ADD_LIKE)
-        async def route_createuserGET(pid: str):
+        async def route_addlikeGET(pid: str):
             if not pid:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(addLike(self._client.get_session(), pid))
 
         @self._router.post(self._ENDPOINT_ADD_UNLIKE)
-        async def route_createuserPOST(pid: str):
+        async def route_addunlikePOST(pid: str):
             if not pid:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(addUnLike(self._client.get_session(), pid))
 
         @self._router.get(self._ENDPOINT_ADD_UNLIKE)
-        async def route_createuserGET(pid: str):
+        async def route_addunlikeGET(pid: str):
             if not pid:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(addUnLike(self._client.get_session(), pid))
 
         @self._router.post(self._ENDPOINT_ADD_COMMENT)
-        async def route_createuserPOST(pid: str, body: str, author_name: str, author_id: str):
+        async def route_addcommentPOST(pid: str, body: str, author_name: str, author_id: str):
             if not pid or not body or not author_name or not author_id:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(addComment(self._client.get_session(), pid, body, author_name, author_id))
 
         @self._router.get(self._ENDPOINT_ADD_COMMENT)
-        async def route_createuserGET(pid: str, body: str, author_name: str, author_id: str):
+        async def route_addcommentGET(pid: str, body: str, author_name: str, author_id: str):
             if not pid or not body or not author_name or not author_id:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(addComment(self._client.get_session(), pid, body, author_name, author_id))
 
         @self._router.post(self._ENDPOINT_GET_COMMENTS)
-        async def route_createuserPOST(pid: str):
+        async def route_getcommentsPOST(pid: str):
             if not pid:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(getComments(self._client.get_session(), pid))
 
         @self._router.get(self._ENDPOINT_GET_COMMENTS)
-        async def route_createuserGET(pid: str):
+        async def route_getcommentsGET(pid: str):
             if not pid:
                 raise HTTPException(status_code=400, detail="Invalid input data")
             return json.dumps(getComments(self._client.get_session(), pid))

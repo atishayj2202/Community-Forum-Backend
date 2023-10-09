@@ -32,7 +32,7 @@ class userRouter():
         async def route_getuserGET(id: str):
             if not id:
                 raise HTTPException(status_code=400, detail="Invalid input data")
-            return json.dumps(await get_user(self._client.get_session(), id))
+            return json.dumps(get_user(self._client.get_session(), id))
 
     @property
     def get_Router(self):
