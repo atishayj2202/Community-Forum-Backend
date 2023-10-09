@@ -8,7 +8,7 @@ class userRouter():
         self._ENDPOINT_GET_USER = "/get_user/"
         self._ENDPOINT_CREATE_USER = "/create_user/"
         self._client = client
-        self._router = APIRouter()
+        self._router = APIRouter(prefix="/user")
 
         @self._router.post(self._ENDPOINT_CREATE_USER)
         async def route_createuserPOST(name: str, uid: str):
