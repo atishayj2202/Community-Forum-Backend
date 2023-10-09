@@ -1,5 +1,5 @@
-from src.client.db import CockroachDBClient
-from src.db.articleHandler import add_Post
+from src.client.cockroach import CockroachDBClient
+from src.db.userHandler import get_user
 eng = CockroachDBClient()
 
-print(add_Post(eng.get_session(), "Hello Tony Lets make Some power", "I'm Asshole", "Apple", "79f4bba1-c7b4-4d4a-a011-2a6b66f2b332"))
+print(get_user(eng.get_session(), "d66d24fb-d32c-49db-b69a-ff08beade403"))
