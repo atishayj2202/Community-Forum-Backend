@@ -28,6 +28,8 @@ def addComment(Session, pid, body, author_name, author_id):
         session.execute(statement=text(
             "INSERT INTO article_comments (article_id, author_id, author_name, comment_text) VALUES (:el1, :el2, :el3, :el4);"),
             params={"el1": pid, "el2": author_id, "el3" : author_name, "el4":body})
+        session.execute(statement=text("UPDATE articles SET comments = comments + 1 WHERE id = :el1;"),
+                        params={"el1": pid})
         session.commit()
         return {"Status": "Success"}
     except:
@@ -41,6 +43,19 @@ def getComments(Session, pid):
         }).fetchall()
         if len(result) < 1:
             return {"Status": "Not Success", "Data": "Not Found"}
-        return {"Status": "Found", "Data": result}
+        return {"Status": "Found", "Data": comment_parser(result)}
     except:
         return {"Status": "Error", "Data": "Unexpected Error"}
+
+def comment_parser(result):
+    main = []
+    for i in result:
+        temp = {
+            "id" : str(i[0]),
+            "pid" : str(i[1]),
+            "author_id": str(i[2]),
+            "author_name" : str(i[3]),
+            "body" : str(i[4])
+        }
+        main.append(temp)
+    return main
