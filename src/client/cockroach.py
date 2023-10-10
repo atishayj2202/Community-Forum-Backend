@@ -6,7 +6,8 @@ from pathlib import Path
 
 class CockroachDBClient:
     def __init__(self):
-        self.URL = "cockroachdb://atishay:AGEAR3l-dfQmO4i-pbCvUg@air-transfer-12735.5xj.cockroachlabs.cloud:26257/Forum?sslmode=verify-full"
+        cert_dir = Path(__file__).resolve().parent.parent.parent / "cert" / "root.crt"
+        self.URL = "cockroachdb://atishay:AGEAR3l-dfQmO4i-pbCvUg@air-transfer-12735.5xj.cockroachlabs.cloud:26257/Forum?sslmode=verify-full&sslrootcert=" + str(cert_dir)
         try:
             self.engine = create_engine(self.URL)
         except Exception as e:
