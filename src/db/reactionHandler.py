@@ -22,9 +22,14 @@ def addUnLike(Session, pid):
         return {"Status": "Error", "Data": "Unexpected Error"}
 
 
-def addComment(Session, pid, body, author_name, author_id):
+def addComment(Session, pid, body, author_id):
     session = Session()
     try:
+        result = session.execute(statement=text("SELECT * FROM authors WHERE id = :el1;"),
+                                 params={"el1": author_id}).fetchall()
+        if len(result) < 1:
+            return {"Status": "Not Success", "Data": "Not Found"}
+        author_name = str(result[0][1])
         session.execute(statement=text(
             "INSERT INTO article_comments (article_id, author_id, author_name, comment_text) VALUES (:el1, :el2, :el3, :el4);"),
             params={"el1": pid, "el2": author_id, "el3" : author_name, "el4":body})
