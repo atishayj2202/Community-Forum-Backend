@@ -17,11 +17,11 @@ def create_user(Session, author_name, uid):
             result = session.execute(statement=text("SELECT * FROM authors WHERE uid = :el1;"),
                                      params={"el1": uid}).fetchall()
             if len(result) < 1:
-                return {"Status": "Error", "Data": "Unexpected Error1"}
+                return {"Status": "Error", "Data": "Unexpected Error"}
             return {"Status": "Success",
-                    "Data": str(result[0][2])}
+                    "Data": str(result[0][0])}
         except:
-            return {"Status": "Error", "Data": "Unexpected Error2"}
+            return {"Status": "Error", "Data": "Unexpected Error"}
 
 
 def get_user(Session, id):
